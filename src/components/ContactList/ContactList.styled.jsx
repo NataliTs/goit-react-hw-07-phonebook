@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const ContactContainer = styled.div`
+  padding: 15px;
+  width: 500px;
+  margin-bottom: 15px;
+  background: ${p => p.theme.colors.backgroundInput};
+`;
+
 export const Contact = styled.li`    display: flex;
     gap: 20px;
     justify-content: space-between;

@@ -8,9 +8,8 @@ import {
   AddButton,
 } from './ContactForm.styled';
 import * as Yup from 'yup';
-import { nanoid } from 'nanoid';
-import { getContacts } from '../../redux/selectors';
-import { addContact } from '../../redux/contactsSlice';
+import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 
 const ContactSchema = Yup.object().shape({
   name: Yup.string().required('Required field!'),
@@ -25,7 +24,7 @@ const ContactSchema = Yup.object().shape({
 });
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const onAddContact = newContact => {
@@ -41,11 +40,10 @@ export const ContactForm = () => {
       initialValues={{
         name: '',
         number: '',
-        id: '',
       }}
       validationSchema={ContactSchema}
       onSubmit={(values, actions) => {
-        onAddContact({ ...values, id: nanoid() });
+        onAddContact({ ...values });
         actions.resetForm();
       }}
     >
